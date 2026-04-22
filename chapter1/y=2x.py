@@ -1,3 +1,4 @@
+# 实现了 y = 2x 的 机器学习
 import random
 
 def loss(train :list,k :float) -> float :
@@ -22,3 +23,4 @@ for i in range(500):
     k -= distLoss * rate
     average = loss(train,k)
     print(f"平均差距为{average:.2f},k为{k:.2f}.distLoss为:{distLoss:.2f}")
+
