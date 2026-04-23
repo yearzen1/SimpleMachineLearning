@@ -18,7 +18,7 @@ print(f"平均差距为{average:.2f},k为{k:.2f}")
 
 episo :float = 0.001
 rate :float = 0.001
-for i in range(500):
+for i in range(1000):
     distLoss :float = ( loss(train,k + episo) - loss(train,k) ) / episo
     k -= distLoss * rate
     average = loss(train,k)

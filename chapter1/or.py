@@ -38,14 +38,20 @@ b:float
 
 w1,w2,b = [random.uniform(1,10) for i in range(3)]
 
+# 输出还未训练的参数值和损失值
+print(f"batch: {0},w1: {w1:.4f},w2: {w2:.4f},b: {b:.4f},loss :{loss(w1,w2,b):.4f}")
+
 # 通过有限差分求loss函数极小值
+
 # 每次差分的步长
 eps :float = 1e-3
+
 # 每次的移动的比率
-rate :float = 1e-3
+rate :float = 1
+
 # 训练次数
-print(f"batch: {0},w1: {w1:.4f},w2: {w2:.4f},b: {b:.4f},loss :{loss(w1,w2,b):.4f}")
-batch :int = 500000
+batch :int = 100000
+
 for i in range(batch):
     DlossDw1 = (loss(w1+eps,w2,b) - loss(w1,w2,b)) / eps
     w1 -= DlossDw1 * rate
@@ -53,7 +59,7 @@ for i in range(batch):
     w2 -= DlossDw2 * rate
     DlossDb = (loss(w1,w2,b+eps) - loss(w1,w2,b)) / eps
     b -= DlossDb * rate
-    print(f"batch: {i},w1: {w1:.4f},w2: {w2:.4f},b: {b:.4f},loss :{loss(w1,w2,b):.4f}")
+    print(f"batch: {i},w1: {w1:.7f},w2: {w2:.7f},b: {b:.7f},loss :{loss(w1,w2,b):.7f}")
 
 # 输出真值表输入在模型下的输出
 for trainItem in train:
