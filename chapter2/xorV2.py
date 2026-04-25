@@ -1,1 +1,2 @@
 # 用自己实现的矩阵库，重新实现xor模型
+import matrix as M
