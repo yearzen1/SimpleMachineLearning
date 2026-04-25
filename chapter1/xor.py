@@ -38,7 +38,8 @@ class Xor:
     def train(self,batch :int,rate :float,eps :float) -> None:
         for i in range(batch):
             constLoss = self.loss()
-            
+
+            print(f"batch: {i}, loss: {constLoss:.7f}")
             temp = self.w1
             self.w1 += eps
             dlossdw1 = (self.loss() - constLoss) / eps
@@ -94,10 +95,11 @@ class Xor:
             self.b2 -= dlossdb2 * rate
             self.b3 -= dlossdb3 * rate
 
-            print(f"batch: {i}, loss: {self.loss():.7f}")
+            
             
 
-xor :Xor = Xor(random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1),random.uniform(-1,1))
-xor.train(10000,1e-1,1e-4)
+xor :Xor = Xor(random.uniform(1,1),random.uniform(1,1),random.uniform(1,1),random.uniform(1,1),random.uniform(1,1),random.uniform(1,1),random.uniform(1,1),random.uniform(1,1),random.uniform(1,1))
+# print(xor.__dict__)
+xor.train(1000,1e-1,1e-4)
 
 
