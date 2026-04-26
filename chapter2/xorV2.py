@@ -48,8 +48,8 @@ class Xor:
         for i in range(trainInput.rows):
             y :Matrix = self.forward(trainInput.getSubMatrixByRow(i))
             diff :Matrix = y - trainOutput.getSubMatrixByRow(i)
-            for i in range(diff.columns):
-                diff.SetAt(0,i,diff.GetAt(0,i) ** 2)
+            for j in range(diff.columns):
+                diff.SetAt(0,j,diff.GetAt(0,j) ** 2)
             sum += diff
         result :float = 0
         for i in range(sum.columns):
@@ -107,7 +107,9 @@ trainoutput :Matrix = train1.getSubMatrix(0,2,3,2)
 # traininput.print()
 # trainoutput.print()
 xor :Xor = Xor()
-for i in range(10000):
+# xor.forward(traininput.getSubMatrixByRow(0)).print()
+# print(xor.loss(traininput,trainoutput))
+for i in range(1000):
     print(f"batch:{i}",end = " ")
     xor.train(1e-1,1e-4,traininput,trainoutput)
 # xor.w1.print()

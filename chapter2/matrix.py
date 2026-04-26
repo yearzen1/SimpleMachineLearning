@@ -1,5 +1,6 @@
 # 自己实现一个矩阵加法，点乘的库
 from __future__ import annotations
+from typing import Callable
 class Matrix:
     def __init__(self,rows :int,columns :int,name :str):
         self.name :str = name
@@ -15,7 +16,7 @@ class Matrix:
         else:
             self.matrix[row][column] = value
             return True
-    def GetAt(self,row :int,column :int) -> float:
+    def GetAt(self,row :int,column :int) -> float | None:
         if row < 0 or row > self.rows - 1:
             return None
         elif column < 0 or column > self.columns -1:
@@ -23,7 +24,7 @@ class Matrix:
         else:
             return self.matrix[row][column] 
     
-    def Fulfill(self,value :int) -> None:
+    def Fulfill(self,value :float) -> None:
         for i in range(self.rows):
             for j in range(self.columns):
                 self.SetAt(i,j,value)     
@@ -31,7 +32,7 @@ class Matrix:
         print(f"{self.name}:\n[")
         for i in range(self.rows):
             for j in range(self.columns):
-                print(self.matrix[i][j],end = " ")
+                print("\t",self.matrix[i][j],end = " ",sep="")
             print("")
         print("]")
     def getSubMatrixByRow(self,row) -> Matrix:
@@ -58,10 +59,15 @@ class Matrix:
                     result.SetAt(i,j,self.GetAt(rowStart+i,columnStart+j))
         return result
 
+    def everySetByFunc(self,func :Callable[[float],float]) -> None:
+        for i in range(self.rows):
+            for j in range(self.columns):
+                self.SetAt(i,j,func(self.GetAt(i,j)))
+
     def __add__(self,other :Matrix) -> Matrix:
         if self.rows != other.rows or self.columns != other.columns:
             return None
-        result :Matrix = Matrix(self.rows,self.columns,f"{self.name}+{other.name}")
+        result :Matrix = Matrix(self.rows,self.columns,f"{self.name} + {other.name}")
         for i in range(result.rows):
             for j in range(result.columns):
                 result.matrix[i][j] = self.matrix[i][j] + other.matrix[i][j]
